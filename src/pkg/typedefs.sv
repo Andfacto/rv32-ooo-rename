@@ -1,3 +1,4 @@
+package typedefs;
 
 typedef struct packed {
 	logic       valid;  
@@ -30,3 +31,5 @@ typedef struct packed {
 	logic valid;
 	logic hit;
 } br_result_t;
+
+endpackage
