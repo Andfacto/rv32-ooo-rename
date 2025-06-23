@@ -1,5 +1,5 @@
 module rename(
-    input  logic        clk,
+    input  logic        clk_i,
     input  logic        rst_ni,
     input  br_result_t  br_result_i,
     input  p_reg_t      p_commit_i,
@@ -24,8 +24,8 @@ module rename(
 
     always_comb begin
         found_free = 1'b0;
-        free_preg  = '0;
-        for (int i = 1; i < PHYS_REGS; i++) begin
+        free_preg  = 6'b0;
+        for(int i = 1; i < PHYS_REGS; i++) begin
             if (!phys_used[i]) begin
                 found_free = 1'b1;
                 free_preg  = i[5:0];
@@ -36,7 +36,7 @@ module rename(
 
     //OUTPUT LOGIC
     always_comb begin
-        rinstr_o = '0;
+        rinstr_o = 0;
 
         rinstr_o.valid = dinstr_i.valid;
 
@@ -85,7 +85,7 @@ module rename(
     end
 
     //SEQUENTIAL STATE UPDATE
-    always_ff@(posedge clk) begin
+    always_ff@(posedge clk_i) begin
         if(!rst_ni) begin
 			for(int i = 0; i < ARCH_REGS; i++) begin
 				arch2phys[i]      <= i[5:0];
