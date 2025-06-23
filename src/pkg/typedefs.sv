@@ -1,5 +1,3 @@
-package typedefs;
-
 typedef struct packed {
 	logic       valid;  
 	logic [4:0] idx;       	//id of the register
@@ -31,5 +29,3 @@ typedef struct packed {
 	logic valid;
 	logic hit;
 } br_result_t;
-
-endpackage
