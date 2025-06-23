@@ -26,7 +26,7 @@ module rename(
         found_free = 1'b0;
         free_preg  = 6'b0;
         for(int i = 1; i < PHYS_REGS; i++) begin
-            if (!phys_used[i]) begin
+            if(!phys_used[i]) begin
                 found_free = 1'b1;
                 free_preg  = i[5:0];
                 break;
@@ -61,7 +61,7 @@ module rename(
             if(dinstr_i.rd.idx == 5'd0) begin
                 rinstr_o.rd.idx   = 6'd0;
                 rinstr_o.rd.ready = 1'b1;
-            end else if (found_free) begin
+            end else if(found_free) begin
                 rinstr_o.rd.idx   = free_preg;
                 rinstr_o.rd.ready = 1'b0;
             end else begin
@@ -99,7 +99,7 @@ module rename(
         end else begin
             // Flush mapping if branch mispredicted
             if(br_result_i.valid && !br_result_i.hit) begin
-                for (int i = 0; i < ARCH_REGS; i++) begin
+                for(int i = 0; i < ARCH_REGS; i++) begin
                     arch2phys[i] <= arch2phys_bkup[i];
                 end
                 branch_active <= 1'b0;
